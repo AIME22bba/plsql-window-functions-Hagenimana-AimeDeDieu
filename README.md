@@ -31,6 +31,8 @@ orders — transaction header (one order per event).
 order_lines — order details (item & qty) — this is essential for proper revenue calculations.
 
 # screenshoots
+### Creation of tables
+![customer table](screenshots/customers.png)
 
 
 
