@@ -31,12 +31,13 @@ orders — transaction header (one order per event).
 order_lines — order details (item & qty) — this is essential for proper revenue calculations.
 
 # screenshoots
-Creation of tables
--------------------
+Table of Customers and data
+-------------------------
 ![customer table](screenshots/customers.png)
 
-
-
+Top 5 menu items per region/quarter
+---------------------------------
+![customer table](screenshots/Top5 items pee region.png)
 
 #  References
 Oracle Corporation. (2025). Error Messages Reference (ORA-00933, ORA-02291, etc.).
