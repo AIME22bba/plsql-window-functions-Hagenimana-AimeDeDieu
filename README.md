@@ -35,7 +35,7 @@ Table of Customers and data
 -------------------------
 ![customer table](screenshots/customers.png)
 
-Top 5 menu items per region/quarter
+Month-over-month growth (LAG/LEAD)
 ---------------------------------
 ![customer table](screenshots/Navigation.png)
 
