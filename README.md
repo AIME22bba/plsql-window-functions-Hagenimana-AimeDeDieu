@@ -37,7 +37,7 @@ Table of Customers and data
 
 Top 5 menu items per region/quarter
 ---------------------------------
-![customer table](screenshots/navigation.png)
+![customer table](screenshots/Navigation.png)
 
 
 #  References
