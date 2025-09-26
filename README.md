@@ -39,6 +39,9 @@ Month-over-month growth (LAG/LEAD)
 ---------------------------------
 ![customer table](screenshots/Navigation.png)
 
+Running monthly sales totals (SUM() OVER) with frame
+---------------------------------------
+![customer table](screenshots/aggregate.png)
 
 #  References
 Oracle Corporation. (2025). Error Messages Reference (ORA-00933, ORA-02291, etc.).
