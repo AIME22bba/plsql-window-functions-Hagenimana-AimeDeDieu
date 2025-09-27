@@ -68,12 +68,49 @@ Output:
 -------------------------------------------
 LAG() fetches previous month revenue; growth% is calculated safely (avoid division by zero). Use LEAD() similarly for forecasting or next-period comparisons
 
-Running monthly sales totals (SUM() OVER) with frame
----------------------------------------
+Aggregate: Running monthly sales totals (SUM() OVER) with frame
+-------------------------
+Goal: Running (cumulative) monthly revenue per region
+```sql
+WITH monthly_sales AS (
+  SELECT k.region,
+         TRUNC(o.event_date, 'MM') AS month,
+         SUM(ol.quantity * ol.unit_price) AS month_revenue
+  FROM orders o
+  JOIN order_lines ol ON o.order_id = ol.order_id
+  JOIN kitchens k ON o.kitchen_id = k.kitchen_id
+  GROUP BY k.region, TRUNC(o.event_date, 'MM')
+)
+SELECT region,
+       month,
+       month_revenue,
+       SUM(month_revenue) OVER (PARTITION BY region ORDER BY month
+                                ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_revenue
+FROM monthly_sales
+ORDER BY region, month;
+```
+
 ![aggregate](screenshots/aggregate.png)
 -----------------------------------------
 This shows cumulative revenue for each region over time. Use ROWS frame for an exact preceding-rows window; for date-aggregates, ordering by month is appropriate.
 
+ Distribution: Customer quartiles (NTILE(4) and CUME_DIST)
+ ------------------------
+-- Goal: Segment customers into revenue quartiles using lifetime revenue
+```sql
+WITH cust_revenue AS (
+  SELECT c.customer_id, c.full_name, c.region,
+         SUM(ol.quantity * ol.unit_price) AS total_revenue
+  FROM customers c
+  LEFT JOIN orders o ON c.customer_id = o.customer_id
+  LEFT JOIN order_lines ol ON o.order_id = ol.order_id
+  GROUP BY c.customer_id, c.full_name, c.region
+)
+SELECT customer_id, full_name, region, total_revenue,
+       NTILE(4) OVER (ORDER BY total_revenue DESC) AS revenue_quartile,
+       CUME_DIST() OVER (ORDER BY total_revenue DESC) AS cume_dist
+FROM cust_revenue
+ORDER BY total_revenue DESC;
 
 #  References
 Oracle Corporation. (2025). Error Messages Reference (ORA-00933, ORA-02291, etc.).
@@ -89,3 +126,9 @@ https://mode.com/sql-tutorial/sql-window-functions/
 
 Vertabelo Academy (2024). SQL Window Functions Tutorial.
 https://academy.vertabelo.com/blog/sql-window-functions/
+```
+Output:
+---
+![aggregate](screenshots/distribution.png)
+---------
+ NTILE(4) places customers into four buckets; top revenue customers will be in quartile 1. CUME_DIST() gives cumulative distribution useful for percentile thresholds.
