@@ -36,6 +36,9 @@ Table of Customers and data
 ![customer table](screenshots/customers.png)
 ---------------------------------------
 This is the the table and data of customers i created and in folder of screenshots i pushed contains other screenshots of tables i created
+ER-Diagram
+-----------
+![ER-Diagram](screenshots/ER_Diagram.png)
 
 ## Step 4: Window Functions Implementation (4 pts)
  Navigation:
