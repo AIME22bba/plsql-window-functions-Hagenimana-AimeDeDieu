@@ -132,3 +132,17 @@ Output:
 ![aggregate](screenshots/distribution.png)
 ---------
  NTILE(4) places customers into four buckets; top revenue customers will be in quartile 1. CUME_DIST() gives cumulative distribution useful for percentile thresholds.
+## References
+Itzik Ben-Gan (2019). T-SQL Window Functions: For Data Analysis and Beyond. Redgate Publishing.
+
+Markus Winand (2012). SQL Performance Explained. Vienna: Markus Winand.
+https://use-the-index-luke.com
+
+Mode Analytics (2023). Introduction to SQL Window Functions.
+https://mode.com/sql-tutorial/sql-window-functions/
+
+Vertabelo Academy (2024). SQL Window Functions Tutorial.
+https://academy.vertabelo.com/blog/sql-window-functions/
+
+DataCamp (2024). Master SQL Window Functions.
+https://www.datacamp.com/tutorial/sql-window-functions
