@@ -7,20 +7,20 @@ Expected Outcome: Produce actionable insights: (1) top menu items per region/qua
 
 #  Success criteria — exactly 5 measurable goals 
 -------------------------------------------------
-Top 5 menu items per region per quarter : use RANK() to list top 5 by revenue (goal met if query returns 5 items per region/quarter).
+1.Top 5 menu items per region per quarter : use RANK() to list top 5 by revenue (goal met if query returns 5 items per region/quarter).
 
-Running monthly revenue totals for each kitchen/region : SUM() OVER (PARTITION BY region ORDER BY month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) (goal met if cumulative totals computed).
+2.Running monthly revenue totals for each kitchen/region : SUM() OVER (PARTITION BY region ORDER BY month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) (goal met if cumulative totals computed).
 
-Month-over-month growth rate for each region :LAG() to compute previous month revenue and growth% (goal met if growth% computed for all months after first).
+3.Month-over-month growth rate for each region :LAG() to compute previous month revenue and growth% (goal met if growth% computed for all months after first).
 
-Customer revenue quartiles : NTILE(4) to assign customers to quartiles (goal met if customers distributed into 4 buckets).
+4.Customer revenue quartiles : NTILE(4) to assign customers to quartiles (goal met if customers distributed into 4 buckets).
 
-3-month moving average of monthly sales for forecasting : AVG() OVER (PARTITION BY region ORDER BY month ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) (goal met if 3-month averages computed).
+5.3-month moving average of monthly sales for forecasting : AVG() OVER (PARTITION BY region ORDER BY month ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) (goal met if 3-month averages computed).
 
 ##  Database schema 
 -------------------
-Overview (minimum 3 related tables)
-
+I have created 5 tables which are these:
+----------------------------------
 customers: stores customer profiles.
 
 kitchens: regional kitchens (delivery origin).
@@ -31,16 +31,39 @@ orders: transaction header (one order per event).
 
 order_lines: order details (item & qty) this is essential for proper revenue calculations.
 
-# screenshoots
 Table of Customers and data
 -------------------------
 ![customer table](screenshots/customers.png)
 ---------------------------------------
 This is the the table and data of customers i created and in folder of screenshots i pushed contains other screenshots of tables i created
 
-
-Month-over-month growth (LAG/LEAD)
+## Step 4: Window Functions Implementation (4 pts)
+ Navigation:
 ---------------------------------
+Goal: Compute month-over-month revenue and growth%
+```sql
+WITH monthly_sales AS (
+  SELECT k.region,
+         TRUNC(o.event_date, 'MM') AS month,
+         SUM(ol.quantity * ol.unit_price) AS month_revenue
+  FROM orders o
+  JOIN order_lines ol ON o.order_id = ol.order_id
+  JOIN kitchens k ON o.kitchen_id = k.kitchen_id
+  GROUP BY k.region, TRUNC(o.event_date, 'MM')
+)
+SELECT region,
+       month,
+       month_revenue,
+       LAG(month_revenue) OVER (PARTITION BY region ORDER BY month) AS prev_month_revenue,
+       CASE
+         WHEN LAG(month_revenue) OVER (PARTITION BY region ORDER BY month) IS NULL THEN NULL
+         WHEN LAG(month_revenue) OVER (PARTITION BY region ORDER BY month) = 0 THEN NULL
+         ELSE ROUND( (month_revenue - LAG(month_revenue) OVER (PARTITION BY region ORDER BY month)) / LAG(month_revenue) OVER (PARTITION BY region ORDER BY month) * 100, 2)
+       END AS mom_growth_pct
+FROM monthly_sales
+ORDER BY region, month;
+```
+Output:
 ![navigation](screenshots/Navigation.png)
 -------------------------------------------
 LAG() fetches previous month revenue; growth% is calculated safely (avoid division by zero). Use LEAD() similarly for forecasting or next-period comparisons
