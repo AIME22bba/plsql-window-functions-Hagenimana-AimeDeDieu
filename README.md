@@ -35,17 +35,21 @@ Table of Customers and data
 -------------------------
 ![customer table](screenshots/customers.png)
 ---------------------------------------
-This shows cumulative revenue for each region over time. Use ROWS frame for an exact preceding-rows window; for date-aggregates, ordering by month is appropriate.
-
+This is the the table and data of customers i created and in folder of screenshots i pushed contains other screenshots of tables i created
 
 
 Month-over-month growth (LAG/LEAD)
 ---------------------------------
 ![customer table](screenshots/Navigation.png)
+-------------------------------------------
+LAG() fetches previous month revenue; growth% is calculated safely (avoid division by zero). Use LEAD() similarly for forecasting or next-period comparisons
 
 Running monthly sales totals (SUM() OVER) with frame
 ---------------------------------------
 ![customer table](screenshots/aggregate.png)
+-----------------------------------------
+This shows cumulative revenue for each region over time. Use ROWS frame for an exact preceding-rows window; for date-aggregates, ordering by month is appropriate.
+
 
 #  References
 Oracle Corporation. (2025). Error Messages Reference (ORA-00933, ORA-02291, etc.).
