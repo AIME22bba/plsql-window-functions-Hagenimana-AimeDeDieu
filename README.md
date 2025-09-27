@@ -5,10 +5,10 @@ Business Context: ADD'S CUISINE is a catering & delivery business specializing i
 Data Challenge: Management needs analytical queries to identify top-selling menu items by region/quarter, track running monthly revenue, compute month-to-month growth for planning, segment customers by revenue, and compute 3-month moving averages for demand forecasting.
 Expected Outcome: Produce actionable insights: (1) top menu items per region/quarter to prioritize inventory and promotions; (2) customer segments for VIP targeting; (3) demand trends for staffing and ingredient procurement.
 
-##  Success criteria — exactly 5 measurable goals 
+#  Success criteria — exactly 5 measurable goals 
 -------------------------------------------------
 Top 5 menu items per region per quarter : use RANK() to list top 5 by revenue (goal met if query returns 5 items per region/quarter).
---------------------------------------------------------
+
 Running monthly revenue totals for each kitchen/region : SUM() OVER (PARTITION BY region ORDER BY month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) (goal met if cumulative totals computed).
 
 Month-over-month growth rate for each region :LAG() to compute previous month revenue and growth% (goal met if growth% computed for all months after first).
@@ -29,7 +29,7 @@ menu_items: products / items (dishes / packages).
 
 orders: transaction header (one order per event).
 
-order_lines: order details (item & qty) — this is essential for proper revenue calculations.
+order_lines: order details (item & qty) this is essential for proper revenue calculations.
 
 # screenshoots
 Table of Customers and data
