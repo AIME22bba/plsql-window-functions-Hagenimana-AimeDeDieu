@@ -20,20 +20,24 @@ Customer revenue quartiles → NTILE(4) to assign customers to quartiles (goal m
 #  Database schema 
 Overview (minimum 3 related tables)
 
-customers — stores customer profiles.
+customers: stores customer profiles.
 
-kitchens — regional kitchens (delivery origin).
+kitchens: regional kitchens (delivery origin).
 
-menu_items — products / items (dishes / packages).
+menu_items: products / items (dishes / packages).
 
-orders — transaction header (one order per event).
+orders: transaction header (one order per event).
 
-order_lines — order details (item & qty) — this is essential for proper revenue calculations.
+order_lines: order details (item & qty) — this is essential for proper revenue calculations.
 
 # screenshoots
 Table of Customers and data
 -------------------------
 ![customer table](screenshots/customers.png)
+---------------------------------------
+This shows cumulative revenue for each region over time. Use ROWS frame for an exact preceding-rows window; for date-aggregates, ordering by month is appropriate.
+
+
 
 Month-over-month growth (LAG/LEAD)
 ---------------------------------
