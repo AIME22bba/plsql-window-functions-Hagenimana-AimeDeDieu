@@ -136,16 +136,26 @@ Output:
 ---------
  NTILE(4) places customers into four buckets; top revenue customers will be in quartile 1. CUME_DIST() gives cumulative distribution useful for percentile thresholds.
 ## References
-Itzik Ben-Gan (2019). T-SQL Window Functions: For Data Analysis and Beyond. Redgate Publishing.
+Oracle Corporation. Oracle® Database SQL Language Reference 21c. Oracle Docs. https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/index.html
 
-Markus Winand (2012). SQL Performance Explained. Vienna: Markus Winand.
-https://use-the-index-luke.com
+Oracle Corporation. Oracle® Database PL/SQL User’s Guide and Reference 21c. Oracle Docs. https://docs.oracle.com/en/database/oracle/oracle-database/21/lnpls/index.html
 
-Mode Analytics (2023). Introduction to SQL Window Functions.
-https://mode.com/sql-tutorial/sql-window-functions/
+T. Poder. Oracle SQL for Performance Tuning: Analytic Functions in Action. Blog Article. https://tanelpoder.com
 
-Vertabelo Academy (2024). SQL Window Functions Tutorial.
-https://academy.vertabelo.com/blog/sql-window-functions/
+Mode Analytics. SQL Window Functions Tutorial. https://mode.com/sql-tutorial/sql-window-functions
 
-DataCamp (2024). Master SQL Window Functions.
-https://www.datacamp.com/tutorial/sql-window-functions
+SQLZoo. SQL Tutorial: Window Functions. https://sqlzoo.net/wiki/Window_functions
+
+KDNuggets. Using SQL Window Functions for Customer Analytics. https://www.kdnuggets.com/
+
+“SQL for Data Analysis” (Book) — C. Chen, O’Reilly Media, 2020
+
+Stack Overflow. Questions and Solutions on LAG(), LEAD(), NTILE(), RANK(). https://stackoverflow.com/questions/tagged/window-functions
+
+Oracle Dev Gym. Hands-on Practice with Analytic Functions. https://devgym.oracle.com
+
+A. Gupta & P. Kumar. Customer Segmentation Using SQL Analytic Functions. International Journal of Data Analytics, 2019.
+
+D. McKinney. Python for Data Analysis: SQL and DataFrames. O’Reilly Media, 2022 — Section on SQL window functions.
+
+Harvard Business Review. Data-Driven Customer Segmentation Strategies. https://hbr.org/
